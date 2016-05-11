@@ -22,8 +22,8 @@ Submit mrPass.c file in your ProjectAI pair
 
 To check your submission compiles use the dryrun
 
-'~cs1917/bin/dryrun MrPass'
+`~cs1917/bin/dryrun MrPass`
 
 To submit your submission use
 
-'give cs1917 MrPass mrPass.c'
+`give cs1917 MrPass mrPass.c`
