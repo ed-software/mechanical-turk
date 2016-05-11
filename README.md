@@ -17,3 +17,13 @@ Write your code in a file named mrPass.c which #includes and implement the inter
 Do not include a main function in your file. Only one member of the group needs to submit.
 
 # Submission
+
+Submit mrPass.c file in your ProjectAI pair
+
+To check your submission compiles use the dryrun
+
+'~cs1917/bin/dryrun MrPass'
+
+To submit your submission use
+
+'give cs1917 MrPass mrPass.c'
