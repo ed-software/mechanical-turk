@@ -20,7 +20,9 @@
 #define SPINOFF_COST { 0, 0, 0, 1, 1, 1 }
 
 action decideAction (Game g) {
-   int player = 1;
+   
+   // assume this program only runs when it is his turn
+   int player = getWhoseTurn (g);
 
    int cost[NUM_DISCIPLINES] = SPINOFF_COST;
 
