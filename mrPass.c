@@ -16,6 +16,7 @@
 #include "Game.h"
 #include "mechanicalTurk.h"
 
+#define NUM_DISCIPLINES 6
 #define SPINOFF_COST { 0, 0, 0, 1, 1, 1 }
 
 action decideAction (Game g) {
