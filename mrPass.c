@@ -28,9 +28,9 @@ action decideAction (Game g) {
    int numMMONEY = getStudents (g, player, STUDENT_MMONEY);
 
 
-   int canSpinoff = numMJ > cost[STUDENT_MJ] &&
-                    numMTV > cost[STUDENT_MTV] &&
-                    numMMONEY > cost[STUDENT_MMONEY];
+   int canSpinoff = numMJ     >= cost[STUDENT_MJ] &&
+                    numMTV    >= cost[STUDENT_MTV] &&
+                    numMMONEY >= cost[STUDENT_MMONEY];
 
    action nextAction;
    if (canSpinoff) {
