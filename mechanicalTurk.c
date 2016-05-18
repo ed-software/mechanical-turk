@@ -1,10 +1,11 @@
-/* 
- *  Nelson Odins-Jones 
+/*
+ *  Nelson Odins-Jones
  *
- *  I have no idea how this will go. I just wanted to 
+ *  I have no idea how this will go. I just wanted to
  *  get something in before tomorrow's tutorial.
  *
  *  Godspeed, fair Turk!
+ *  Version 2
  *
  */
 
@@ -79,7 +80,7 @@
 #define SPINOFF_COST { 0, 0, 0, 1, 1, 1 }
 
 action decideAction (Game g) {
-   
+
    // assume this program only runs when it is his turn
    int playerID = getWhoseTurn (g);
    action nextAction;
@@ -102,19 +103,8 @@ action decideAction (Game g) {
    if (canSpinoff) {
       nextAction.actionCode = START_SPINOFF;
    }
-   
-   // but if it can build an arc, do that
-   int i = 0;
-   int found = 0;
-   while (i < NUM_VERTICES && !found) {
-      nextAction.actionCode = OBTAIN_ARC;
-      strcpy(nextAction.destination, allPaths[i]);
-      if (isLegalAction(g, nextAction)) {
-         found = TRUE;
-      }
-      i++;
-   }
-   
+
+
    // but if it can build a campus, do that!!
    i = 0;
    while (i < NUM_VERTICES && !found) {
@@ -125,6 +115,19 @@ action decideAction (Game g) {
       }
       i++;
    }
+
+   // but if it can't, and it can build an arc, do that
+   int i = 0;
+   int found = 0;
+   while (i < NUM_VERTICES && !found) {
+      nextAction.actionCode = OBTAIN_ARC;
+      strcpy(nextAction.destination, allPaths[i]);
+      if (isLegalAction(g, nextAction)) {
+         found = TRUE;
+      }
+      i++;
+   }
+
    printf("Action code: %d\n", nextAction.actionCode);
    return nextAction;
 }
