@@ -5,7 +5,7 @@
  *  get something in before tomorrow's tutorial.
  *
  *  Godspeed, fair Turk!
- *  Version 3
+ *  Version 4
  *
  */
 
@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+#include <time.h>
 
 #include "Game.h"
 #include "mechanicalTurk.h"
@@ -81,6 +82,8 @@
 
 action decideAction (Game g) {
 
+   srand(time(NULL));
+
    // assume this program only runs when it is his turn
    int playerID = getWhoseTurn (g);
    action nextAction;
@@ -142,7 +145,31 @@ action decideAction (Game g) {
       i++;
    }
 
+   // if it can't build anything, start getting rid of students that might be lost
+   // if a seven is rolled
+
+   if (!found) {
+
+      tvCost = getExchangeRate (g, playerID, STUDENT_MTV, STUDENT_BPS);
+      moneyCost = getExchangeRate (g, playerID, STUDENT_MMONEY, STUDENT_BPS);
+
+      if (numTV >= tvCost) {
+         found = TRUE;
+         nextAction.actionCode = RETRAIN_STUDENTS;
+         nextAction.disciplineFrom = STUDENT_MTV;
+         nextAction.disciplineTo = (rand()%3) + 1;
+      } else if (numMMONEY >= moneyCost) {
+         found = TRUE;
+         nextAction.actionCode = RETRAIN_STUDENTS;
+         nextAction.disciplineFrom = STUDENT_MMONEY;
+         nextAction.disciplineTo = (rand()%3) + 1;
+      }
+
+
+   }
+
    // if all else fails, pass
+   // :(
    printf("Action code: %d\n", nextAction.actionCode);
    return nextAction;
 }
