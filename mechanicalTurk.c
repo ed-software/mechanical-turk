@@ -5,7 +5,7 @@
  *  get something in before tomorrow's tutorial.
  *
  *  Godspeed, fair Turk!
- *  Version 4
+ *  Version 4.2
  *
  */
 
@@ -153,7 +153,7 @@ action decideAction (Game g) {
       int tvCost = getExchangeRate (g, playerID, STUDENT_MTV, STUDENT_BPS);
       int moneyCost = getExchangeRate (g, playerID, STUDENT_MMONEY, STUDENT_BPS);
 
-      if (numTV >= tvCost) {
+      if (numMTV >= tvCost) {
          found = TRUE;
          nextAction.actionCode = RETRAIN_STUDENTS;
          nextAction.disciplineFrom = STUDENT_MTV;
