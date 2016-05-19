@@ -150,8 +150,8 @@ action decideAction (Game g) {
 
    if (!found) {
 
-      tvCost = getExchangeRate (g, playerID, STUDENT_MTV, STUDENT_BPS);
-      moneyCost = getExchangeRate (g, playerID, STUDENT_MMONEY, STUDENT_BPS);
+      int tvCost = getExchangeRate (g, playerID, STUDENT_MTV, STUDENT_BPS);
+      int moneyCost = getExchangeRate (g, playerID, STUDENT_MMONEY, STUDENT_BPS);
 
       if (numTV >= tvCost) {
          found = TRUE;
