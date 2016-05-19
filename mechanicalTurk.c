@@ -5,7 +5,7 @@
  *  get something in before tomorrow's tutorial.
  *
  *  Godspeed, fair Turk!
- *  Version 2
+ *  Version 3
  *
  */
 
@@ -87,8 +87,33 @@ action decideAction (Game g) {
    nextAction.actionCode = PASS;
 
    path allPaths[NUM_VERTICES] = ALL_PATHS;
+   int found = 0;
 
-   // if it can spinoff, do that
+   // if it can build a go8, do that
+
+   int i = 0;
+   while (i < NUM_VERTICES && !found) {
+      nextAction.actionCode = BUILD_GO8;
+      strcpy(nextAction.destination, allPaths[i]);
+      if (isLegalAction(g, nextAction)) {
+         found = TRUE;
+      }
+      i++;
+   }
+
+   // if not, and it can build a campus, do that
+
+   i = 0;
+   while (i < NUM_VERTICES && !found) {
+      nextAction.actionCode = BUILD_CAMPUS;
+      strcpy(nextAction.destination, allPaths[i]);
+      if (isLegalAction(g, nextAction)) {
+         found = TRUE;
+      }
+      i++;
+   }
+
+   // if not, and it can do a spinoff, do that
 
    int spinCost[NUM_DISCIPLINES] = SPINOFF_COST;
 
@@ -100,25 +125,14 @@ action decideAction (Game g) {
                     numMTV    >= spinCost[STUDENT_MTV] &&
                     numMMONEY >= spinCost[STUDENT_MMONEY];
 
-   if (canSpinoff) {
+   if (canSpinoff && !found) {
+      found = TRUE;
       nextAction.actionCode = START_SPINOFF;
    }
 
+   // if not, and it can build an arc, do that
 
-   // but if it can build a campus, do that!!
    i = 0;
-   while (i < NUM_VERTICES && !found) {
-      nextAction.actionCode = BUILD_CAMPUS;
-      strcpy(nextAction.destination, allPaths[i]);
-      if (isLegalAction(g, nextAction)) {
-         found = TRUE;
-      }
-      i++;
-   }
-
-   // but if it can't, and it can build an arc, do that
-   int i = 0;
-   int found = 0;
    while (i < NUM_VERTICES && !found) {
       nextAction.actionCode = OBTAIN_ARC;
       strcpy(nextAction.destination, allPaths[i]);
@@ -128,6 +142,7 @@ action decideAction (Game g) {
       i++;
    }
 
+   // if all else fails, pass
    printf("Action code: %d\n", nextAction.actionCode);
    return nextAction;
 }
